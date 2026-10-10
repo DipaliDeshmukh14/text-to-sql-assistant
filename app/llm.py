@@ -36,7 +36,7 @@ def generate_sql(question: str, schema: str, history: list) -> str:
     system_prompt = SQL_SYSTEM_PROMPT.format(schema=schema, history=history_text)
 
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="openai/gpt-oss-120b",
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": question},
@@ -48,7 +48,7 @@ def generate_sql(question: str, schema: str, history: list) -> str:
 
 def explain_sql(sql: str) -> str:
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+         model="openai/gpt-oss-120b",
         messages=[
             {"role": "system", "content": EXPLAIN_SYSTEM_PROMPT},
             {"role": "user", "content": sql},
@@ -72,7 +72,7 @@ Schema:
 Output ONLY the corrected SQL query, nothing else."""
 
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+         model="openai/gpt-oss-120b",
         messages=[
             {"role": "system", "content": "You are a PostgreSQL expert fixing a broken query."},
             {"role": "user", "content": prompt},
